@@ -8,28 +8,28 @@ type MinHeap interface {
 	fmt.Stringer
 }
 
-type heapData struct {
+type minHeapData struct {
 	size int
 	data []int
 }
 
-func (h heapData) parent(index int) int {
+func (h minHeapData) parent(index int) int {
 	return (index - 1) / 2
 }
 
-func (h heapData) leftChild(index int) int {
+func (h minHeapData) leftChild(index int) int {
 	return index*2 + 1
 }
 
-func (h heapData) rightChild(index int) int {
+func (h minHeapData) rightChild(index int) int {
 	return index*2 + 2
 }
 
-func (h *heapData) swap(dst, src int) {
+func (h *minHeapData) swap(dst, src int) {
 	h.data[src], h.data[dst] = h.data[dst], h.data[src]
 }
 
-func (h *heapData) Insert(num int) {
+func (h *minHeapData) Insert(num int) {
 	h.data = append(h.data, num)
 	h.size++
 	for index := h.size - 1; index > 0; {
@@ -43,7 +43,7 @@ func (h *heapData) Insert(num int) {
 	}
 }
 
-func (h *heapData) Remove() int {
+func (h *minHeapData) Remove() int {
 	removed := h.data[0]
 
 	h.data[0] = h.data[h.size-1]
@@ -67,12 +67,12 @@ func (h *heapData) Remove() int {
 	return removed
 }
 
-func (h heapData) String() string {
+func (h minHeapData) String() string {
 	return fmt.Sprintf("%#v", h.data)
 }
 
 func CreateHeap() MinHeap {
-	return &heapData{
+	return &minHeapData{
 		size: 0,
 		data: make([]int, 0),
 	}
